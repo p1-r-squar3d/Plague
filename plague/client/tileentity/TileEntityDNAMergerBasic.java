@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import plague.client.block.BlockDNAMergerBasic;
 import plague.client.block.BlockSyringeScannerBasic;
+import plague.client.pathogen.NeedToBeFixedByP1;
 import plague.client.recipe.DNAMergerRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -23,7 +24,7 @@ public class TileEntityDNAMergerBasic extends TileEntity implements IInventory, 
     public int mergerCookTime;
     public int power;
     public int maxPower = 10000;
-    public int scanProgress;
+    public static int scanProgress = 0;
     public int scanSpeed = 100;
     private String customName;
 
@@ -412,7 +413,7 @@ public class TileEntityDNAMergerBasic extends TileEntity implements IInventory, 
 
 	@Override
 	public boolean isScanning() {
-		scanProgress++;
+		evis();
 		return this.mergerCookTime > 0;
 	}
 
@@ -420,4 +421,12 @@ public class TileEntityDNAMergerBasic extends TileEntity implements IInventory, 
 	public boolean isPowerDrained() {
 		return false;
 	}
-}
+@NeedToBeFixedByP1	
+	public static void evis() {
+		scanProgress++;
+		int d = scanProgress / 2;
+		int x = scanProgress * -3;
+	if(scanProgress == 3) {
+	}
+	}
+} 

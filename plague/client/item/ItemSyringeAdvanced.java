@@ -10,12 +10,10 @@ import plague.common.Plague;
 import plague.common.assets.StringColor;
 
 public class ItemSyringeAdvanced extends Item { 
-
-private String unLocalizedName = this.getClass().getName();
 	
 public ItemSyringeAdvanced(int par1) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[3]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 	setMaxDamage(1000);

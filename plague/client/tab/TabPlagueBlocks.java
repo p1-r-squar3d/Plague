@@ -2,6 +2,7 @@ package plague.client.tab;
 
 import net.minecraft.creativetab.CreativeTabs;
 import plague.client.block.PlagueBlocks;
+import plague.common.assets.StringColor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -20,6 +21,6 @@ return PlagueBlocks.blockSyringeScannerBasicIdle.blockID;
 public String getTranslatedTabLabel()
 {
 //Creative Tab In-Game Name	
-return "Plague Blocks";
+	return StringColor.dark_red + "Plague " + StringColor.dark_gray + "Blocks";
 }
 }

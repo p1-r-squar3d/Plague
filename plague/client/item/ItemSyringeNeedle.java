@@ -6,11 +6,9 @@ import plague.common.Plague;
 
 public class ItemSyringeNeedle extends Item {
 
-private String unLocalizedName = this.getClass().getName();
-	
 public ItemSyringeNeedle(int par1) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[12]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 }

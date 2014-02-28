@@ -11,11 +11,14 @@ import org.lwjgl.opengl.GL11;
 import plague.client.container.ContainerDNAMergerBasic;
 import plague.client.tileentity.TileEntityDNAMergerBasic;
 import plague.common.Plague;
+import plague.common.assets.RandyGen;
 import plague.common.assets.StringColor;
 
 	public class GUIDNAMergerBasic extends GuiContainer{
 		public static final ResourceLocation texture = new ResourceLocation(Plague.ID, "textures/gui/DNAMergerBasicGui.png");
 		public static String powerStatus;
+		public static String mergeStatus;
+		
 		public TileEntityDNAMergerBasic merger;
 		
 		int [] tier1 = {10,20,30,40,50,60,70,80,90};
@@ -28,9 +31,29 @@ import plague.common.assets.StringColor;
 			this.ySize = 247; /**FROM UP TO DOWN SCALE**/
 		}
 		
+		private void gen() {
+			int i = RandyGen.generateRandomInt(1, 10);
+		if(merger.isScanning()) {	
+			if(i == 1) {
+				mergeStatus = "Success";
+			}
+			else
+			{
+				mergeStatus = "Failed";
+			}
+		}
+		}
 		public void drawGuiContainerForegroundLayer(int par1, int par2){
 			String s = this.merger.isInvNameLocalized() ? this.merger.getInvName() : I18n.getString(this.merger.getInvName());
 			this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 4, 4210752);
+			gen();
+		if(this.merger.isScanning()) {	
+			this.fontRenderer.drawString(mergeStatus + merger.scanProgress + "%", 100, ySize - 154 + 32, xSize + 20);
+		}
+		else
+		{
+			this.fontRenderer.drawString("Idle", 100, ySize - 154 + 32, xSize + 20);
+		}
 			this.fontRenderer.drawString(I18n.getString("container.inventory"), 5, this.ySize - 96 + 4, 4210752);
 			this.fontRenderer.drawString("Power:", 60, ySize - 154 + 32, xSize + 20);
 			this.fontRenderer.drawString("" + merger.power + "/10000", 63, ySize - 154 + 47, 428766);

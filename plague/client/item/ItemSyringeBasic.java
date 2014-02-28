@@ -9,12 +9,10 @@ import net.minecraft.item.ItemStack;
 import plague.common.Plague;
 
 public class ItemSyringeBasic extends Item {
-
-private String unLocalizedName = this.getClass().getName();	
 	
 public ItemSyringeBasic(int par1, boolean canHoldFluid_confir) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[0]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 	setMaxDamage(50);

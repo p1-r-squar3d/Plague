@@ -14,11 +14,10 @@ import plague.common.assets.StringColor;
 public class ItemUVScannerBasic extends Item {
 
 private int microOrganisms;
-private String unLocalizedName = this.getClass().getName();
 
 public ItemUVScannerBasic(int par1) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[1]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 	setMaxDamage(500);

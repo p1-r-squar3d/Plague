@@ -13,11 +13,9 @@ import plague.common.assets.StringColor;
 
 public class ItemBlockirusDeployerAdvanced extends Item {
 
-private String unLocalizedName = this.getClass().getName().toLowerCase();
-
 public ItemBlockirusDeployerAdvanced(int par1) {	
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[5]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 	setMaxDamage(1000);

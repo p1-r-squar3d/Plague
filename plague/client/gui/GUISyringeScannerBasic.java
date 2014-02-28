@@ -1,5 +1,7 @@
 	package plague.client.gui;
 
+import java.awt.Graphics;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -10,16 +12,18 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import plague.client.container.ContainerSyringeScannerBasic;
+import plague.client.pathogen.PathogenRenderer;
 import plague.client.tileentity.TileEntitySyringeScannerBasic;
 import plague.common.Plague;
-import plague.common.assets.StringColor;
 
 	public class GUISyringeScannerBasic extends GuiContainer{
 		public static final ResourceLocation texture = new ResourceLocation(Plague.ID, "textures/gui/syringeScannerBasicGui.png");
 		public TileEntitySyringeScannerBasic syringeScanner;
 		public static String powerHash;
 		
+		public GuiButton scan;
 		public GuiButton drain;
+		
 		public GUISyringeScannerBasic(InventoryPlayer invPlayer, TileEntitySyringeScannerBasic entity) {
 			super(new ContainerSyringeScannerBasic(invPlayer, entity));
 			
@@ -28,7 +32,27 @@ import plague.common.assets.StringColor;
 			this.xSize = 210; /**FROM LEFT TO RIGHT SCALE**/
 			this.ySize = 247; /**FROM UP TO DOWN SCALE**/
 		}
-		
+		@Override
+		public void initGui() {
+			super.initGui();
+			buttonList.add(scan = new GuiButton(1, xSize / 2, ySize - 70, 30, 20, "Scan"));
+			buttonList.add(drain = new GuiButton(2, xSize / 2, ySize - 12, 30, 20, "Drain"));
+		}
+		private void sub() {
+		}
+		protected void actionPerformed(GuiButton guibutton) {
+			
+            switch(guibutton.id) {
+            case 1:
+             
+            System.out.println("WAPOW");
+            break;
+            
+            case 2:
+            	if(this.syringeScanner.power > 0)
+            	this.syringeScanner.power--;
+            }
+    }
 		public void drawGuiContainerForegroundLayer(int par1, int par2){
 			String s = this.syringeScanner.isInvNameLocalized() ? this.syringeScanner.getInvName() : I18n.getString(this.syringeScanner.getInvName());
 			

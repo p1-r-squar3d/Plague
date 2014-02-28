@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import plague.client.item.PlagueItems;
+import plague.client.recipe.manager.RecipeManagerCircuitBuilder;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class PlagueRecipes {
@@ -34,7 +35,17 @@ public static void load() {
 	
 	GameRegistry.addShapedRecipe(new ItemStack(PlagueItems.itemGlassStrip, 3, 0), new Object[]
 	{
-	"XXX","XXX","XXX", Character.valueOf('X'), new ItemStack(PlagueItems.itemRubber, 1, 2)
+		"XXX","XXX","XXX", Character.valueOf('X'), new ItemStack(PlagueItems.itemRubber, 1, 2)
+	});
+	
+	RecipeManagerCircuitBuilder.getInstance().addShapedRecipe(new ItemStack(Item.bow, 1), new Object[] 
+	{
+		" II", "I S", "I S", "I S", " II", 'I', Item.stick, 'S', Item.silk
+	});
+	
+	RecipeManagerCircuitBuilder.getInstance().addShapelessRecipe(new ItemStack(Item.diamond, 9), new Object[] 
+	{
+		Block.blockDiamond
 	});
 }
 }

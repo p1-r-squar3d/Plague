@@ -3,13 +3,14 @@ package plague.client.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import plague.client.block.PlagueBlocks;
+import plague.client.container.ContainerCircuitBuilder;
 import plague.client.container.ContainerDNAMergerBasic;
 import plague.client.container.ContainerSyringeScannerBasic;
+import plague.client.tileentity.TileEntityCircuitBuilder;
 import plague.client.tileentity.TileEntityDNAMergerBasic;
 import plague.client.tileentity.TileEntitySyringeScannerBasic;
-import plague.common.Plague;
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
 
 	public class PlagueGUIHandler implements IGuiHandler {
 		public PlagueGUIHandler() {
@@ -19,9 +20,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 		@Override
 		public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 			TileEntity entity = world.getBlockTileEntity(x, y, z);
-
 			if(entity != null){
 				switch (id) {
+										
 					case 8:
 						if (entity instanceof TileEntitySyringeScannerBasic) {
 							return new ContainerSyringeScannerBasic(player.inventory, (TileEntitySyringeScannerBasic) entity);
@@ -34,18 +35,23 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 						return null;
 					default:
 						return null;
+					}
 				}
+			else
+			{
+			switch(id) {
+				case 1: return id == 1 && world.getBlockId(x, y, z) == PlagueBlocks.blockCircuitBuilder.blockID ? new ContainerCircuitBuilder(player.inventory, world, x, y, z, (TileEntityCircuitBuilder) entity) : null;
 			}
-			
 			return null;
 		}
-
+		}
 		@Override
 		public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 			TileEntity entity = world.getBlockTileEntity(x, y, z);
 
 			if(entity != null){
 				switch (id) {
+					
 					case 8:
 						if (entity instanceof TileEntitySyringeScannerBasic) {
 							return new GUISyringeScannerBasic(player.inventory, (TileEntitySyringeScannerBasic) entity);
@@ -60,7 +66,12 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 						return null;
 				}
 			}
-
+			else
+			{
+				switch(id) {
+					case 1: return id == 1 && world.getBlockId(x, y, z) == PlagueBlocks.blockCircuitBuilder.blockID ? new GUICircuitBuilder(player.inventory, world, x, y, z, (TileEntityCircuitBuilder) entity) : null;
+				}
+			}
 			return null;
 		}	
 	}

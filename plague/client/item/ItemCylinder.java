@@ -5,12 +5,10 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
 public class ItemCylinder extends Item {
-
-private String unLocalizedName = this.getClass().getName();
 	
 public ItemCylinder(int par1) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[6]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 }

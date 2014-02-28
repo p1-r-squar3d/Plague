@@ -1,5 +1,6 @@
 package plague.common;
 
+import plague.common.assets.RandyGen;
 import plague.common.assets.StringColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.INetworkManager;
@@ -39,11 +40,14 @@ public class PlagueConnectionHandler implements IConnectionHandler {
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) {
+		int i = RandyGen.generateRandomInt(1000, 10000);
+		
 		 Minecraft.getMinecraft().thePlayer.addChatMessage(StringColor.dark_purple + "Welcome back, " + StringColor.light_cyan + Minecraft.getMinecraft().thePlayer.username.toString() + StringColor.dark_purple + "!");
 		 Minecraft.getMinecraft().thePlayer.addChatMessage("Intel: ["+StringColor.light_yellow+Minecraft.getSystemTime() * 0.001+"s"+StringColor.DEFAULT+"]");
-		 Minecraft.getMinecraft().thePlayer.addChatMessage("Infection Rate: 0%");
-         Minecraft.getMinecraft().thePlayer.addChatMessage("Infected: 0");
-         Minecraft.getMinecraft().thePlayer.addChatMessage("Deaths: 0");
+		 Minecraft.getMinecraft().thePlayer.addChatMessage("Infections per Day: 0");
+		 Minecraft.getMinecraft().thePlayer.addChatMessage("Deaths per Day: 0");
+         Minecraft.getMinecraft().thePlayer.addChatMessage("Total Infections: " + i);
+         Minecraft.getMinecraft().thePlayer.addChatMessage("Total Deaths: " + i);
 
 	}
 

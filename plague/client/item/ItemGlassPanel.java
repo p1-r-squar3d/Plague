@@ -6,12 +6,10 @@ import plague.common.Plague;
 
 public class ItemGlassPanel extends Item {
 
-private String unLocalizedName = this.getClass().getName();
-	
 public ItemGlassPanel(int par1) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
-	setMaxStackSize(1);
+	setUnlocalizedName(PlagueItems.UN[10]);
+	setMaxStackSize(64);
 	setCreativeTab(Plague.tabPlagueItems);
 }
 

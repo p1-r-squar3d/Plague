@@ -11,5 +11,6 @@ public class ClientProxy extends CommonProxy
 	
 @SideOnly(Side.CLIENT)
 public static void registerRenderInformation() {
+	
 }
 }

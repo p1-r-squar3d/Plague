@@ -2,11 +2,16 @@ package plague.client.block;
 
 import java.util.Random;
 
+import plague.client.gui.GUIMicroscope;
+import plague.client.gui.GUISyringeScannerBasic;
+import plague.client.tileentity.TileEntityDNAMergerBasic;
 import plague.client.tileentity.TileEntitySyringeScannerBasic;
 import plague.common.Plague;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -114,13 +119,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 			}
 		}
 
-		public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-			if(!world.isRemote) {
-				FMLNetworkHandler.openGui(player, Plague.instance, 8, world, x, y, z);
+		public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+			if (par1World.isRemote) 
+			{
+				return true;
+			} 
+			else if (!par5EntityPlayer.isSneaking()) 
+			{
+				TileEntitySyringeScannerBasic var10 = (TileEntitySyringeScannerBasic) par1World.getBlockTileEntity(par2, par3, par4);
+				if (var10 != null) 
+				{
+					par5EntityPlayer.openGui(Plague.instance, 8, par1World, par2, par3, par4);
+				}
+				return true;
+			} 
+			else 
+			{
+				return false;
 			}
-			
-			return true;
-		}
+	    }
+	    
 
 		/**
 		 * Update which block ID the furnace is using depending on whether or not it is burning

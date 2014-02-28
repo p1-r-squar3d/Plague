@@ -12,18 +12,15 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class PlagueFluids {
 	
+public static int fluidId = 1000;
 public static Fluid fluidAtrocious;
-public static int idFluidAtrocious = 1007;
-public static Block blockAtrociousFluid;
+public static Block fluidBlockAtrocious;
 
-public static Material materialAtrocious;	
 public static void load() {
-	fluidAtrocious = new Fluid("atrocious").setBlockID(1007);
+	fluidAtrocious = new Fluid("fluidname").setBlockID(fluidId);
 	FluidRegistry.registerFluid(fluidAtrocious);
-	materialAtrocious = new Material(MapColor.dirtColor);
 	
-	blockAtrociousFluid = new BlockAtrociousFluid(PlagueFluids.idFluidAtrocious);
-	LanguageRegistry.instance().addStringLocalization("tile.BlockAtrociousFluid.name", "Atrocious Fluid");
-	GameRegistry.registerBlock(blockAtrociousFluid, StringColor.dark_red + "Atrocious Fluid");
+	fluidBlockAtrocious = new BlockAtrociousFluid(fluidId, fluidAtrocious, Material.water);
+	GameRegistry.registerBlock(fluidBlockAtrocious, "Atrocious Fluid");
 }
 }

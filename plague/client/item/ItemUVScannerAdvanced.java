@@ -9,12 +9,10 @@ import net.minecraft.item.ItemStack;
 import plague.common.Plague;
 
 public class ItemUVScannerAdvanced extends Item {
-
-private String unLocalizedName = this.getClass().getName();
 	
 public ItemUVScannerAdvanced(int par1) {
 	super(par1);
-	setUnlocalizedName(unLocalizedName);
+	setUnlocalizedName(PlagueItems.UN[4]);
 	setMaxStackSize(1);
 	setCreativeTab(Plague.tabPlagueItems);
 }

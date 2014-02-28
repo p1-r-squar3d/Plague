@@ -290,22 +290,37 @@ import cpw.mods.fml.relauncher.SideOnly;
         	
         	powerBorder();
         	if (!this.worldObj.isRemote){
-            	if (this.power < this.maxPower && this.getItemPower(this.slots[1]) > 0){
-            		this.power += getItemPower(this.slots[1]);
-
-            		flag1 = true;
             	
-            	if (this.slots[1] != null) {
-            		
-            		--slots[1].stackSize;            		
-               if (this.slots[1].stackSize == 0){
-                        		this.slots[1].getItem().getContainerItemStack(slots[1]);
-                    	  }
-                	}                
+            		if (this.power < this.maxPower && this.getItemPower(this.slots[1]) > 0) {
+            			
+            			if (!this.slots[1].isItemStackDamageable()) {
+            				this.power += getItemPower(this.slots[1]);
+                	
+            				if (this.slots[1] != null) {
+            					flag1 = true;                			
+            					this.slots[1].stackSize--;
+
+            					if (this.slots[1].stackSize == 0) {
+            						this.slots[1] = this.slots[1].getItem().getContainerItemStack(slots[1]);
+                        		}
+            				}
+                        }else{
+                			this.power += getItemPower(this.slots[1]);
+                			this.slots[1] = new ItemStack(this.slots[1].getItem(), this.slots[1].stackSize, this.slots[1].getItemDamage() + 1);
+                			
+                			if (this.slots[1].getItemDamage() >= this.slots[1].getMaxDamage()) {	
+                				this.slots[1].stackSize--;
+                				
+                				if (this.slots[1].stackSize == 0) {
+                            		this.slots[1] = null;
+                        		}
+                			}
+                		}
+            		}      
 
             	if (this.hasPower() && this.canSmelt())
             	{
-                	++this.cookTime;
+                	this.cookTime++;
 
                 	if (this.cookTime == this.maceratingSpeed)
                 	{
@@ -330,10 +345,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
         	}
             	}
-            	}
-    	}
+        	}
+            	
     	    
-    	public boolean isOre(ItemStack itemstack){
+    	private boolean hasItemPower(ItemStack itemStack) {
+			return false;
+		}
+
+		public boolean isOre(ItemStack itemstack){
     		String[] oreNames = OreDictionary.getOreNames();
     	
     		for(int i = 0; i < oreNames.length; i++){

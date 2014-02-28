@@ -1,9 +1,9 @@
 package plague.client.pathogen;
 
-import plague.client.implementation.IPathogen;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import plague.client.pathogen.type.PathogenType;
+import plague.common.misc.PathogenTypeBacteria;
 
 /**
  *  The core pathogen class, use this instance for creating a new pathogen.
@@ -21,9 +21,12 @@ public static float hotResistance;
 public static float coldResistance;
 public static float drugResistance;
 
+public static Pathogen p;
+
 public static float microscopicScale;
 
 public static String uniqueName;
+public static String desc;
 /**
  * List that contains every aboded pathogen in the game.
  * 50 pathogens can be listed.
@@ -32,10 +35,11 @@ public static String uniqueName;
 public static Pathogen[] pathogenList = new Pathogen[50];
 /**
  * @param i - unique ID for the pathogen
+ * @param p - pathogen type for it
  * @author p1-r_squar3d
  * 
  */
-public Pathogen(int i) {
+public Pathogen(int i, PathogenType p) {
 	if (pathogenList[i] != null) {
 		throw new IllegalArgumentException("Pathogen ID " + i + " is already occupied by " + pathogenList[i] + " when registering " + this);
 	}
@@ -44,8 +48,9 @@ public Pathogen(int i) {
 public abstract boolean isPathogen();
 
 /**
- * Prints the class of the registered pathogen.
+ * Prints the class of the registered pathogen for informational purposes.
  * @param i - id of the pathogen registered.
+ * @author p1-r_squar3d
  */
 public static void printRegisteredPathogen(int i) {
 	String s = pathogenList[i].toString();
@@ -59,7 +64,7 @@ public static void corrode(EntityPlayer p, World w) {
 	p.clearItemInUse();
 	if (!w.isRemote) {
 		w.extinguishFire(p, 2, 3, 4, 5);
-		p.attackTime
+		p.setInvisible(true);
 	}
 }
 /**
@@ -88,31 +93,44 @@ public Pathogen setUniqueName(String s) {
  * Gets the unique name setted.
  * @author p1-r_squar3d
  */
-public String getUniqueName() {
-	return this.uniqueName;
+public static String getUniqueName() {
+	return uniqueName;
 }
 
+public static Pathogen getPathogen() {
+	return p;
+}
+
+public static Pathogen setDescription(String s) {
+	desc = s;
+	return Pathogen.getPathogen();
+}
+public static void getPathogenTypeAdvantage() {
+	if (Pathogen.getPathogen() instanceof PathogenTypeBacteria) {
+		float f = getHotResistance() + 1.0F;
+	}
+}
 @Deprecated
 @NeedToBeFixedByP1
-public String getUniqueNameInPluralForm() {
+public static String getUniqueNameInPluralForm() {
 	
-if (this.uniqueName.endsWith("xxx")) {
-	return this.uniqueName + "s";
+if (uniqueName.endsWith("xxx")) {
+	return uniqueName + "s";
 }
-else if (this.uniqueName.endsWith("ch") 
-		|| (this.uniqueName.endsWith("j")) 
-		|| (this.uniqueName.endsWith("s")) 
-		|| (this.uniqueName.endsWith("x")) 
-		|| (this.uniqueName.endsWith("z")) 
-		|| (this.uniqueName.endsWith("o")) 
-		|| (this.uniqueName.endsWith("sh"))
-		|| (this.uniqueName.endsWith("ch"))
-		|| (this.uniqueName.endsWith("ss")) 
-		|| (this.uniqueName.endsWith("zz")))
+else if (uniqueName.endsWith("ch") 
+		|| (uniqueName.endsWith("j")) 
+		|| (uniqueName.endsWith("s")) 
+		|| (uniqueName.endsWith("x")) 
+		|| (uniqueName.endsWith("z")) 
+		|| (uniqueName.endsWith("o")) 
+		|| (uniqueName.endsWith("sh"))
+		|| (uniqueName.endsWith("ch"))
+		|| (uniqueName.endsWith("ss")) 
+		|| (uniqueName.endsWith("zz")))
 	{
-		return this.uniqueName + "es";
+		return uniqueName + "es";
 	}
-return this.uniqueName;
+return uniqueName;
 }
 /**
  * Sets a default starting value for hot resistance.
@@ -145,22 +163,22 @@ public Pathogen setDrugResistance(float f) {
  * Gets the hot resistance value setted.
  * @author p1-r_squar3d
  */
-public float getHotResistance() {
-	return this.hotResistance;
+public static float getHotResistance() {
+	return hotResistance;
 }
 /**
  * Gets the cold resistance value setted.
  * @author p1-r_squar3d
  */
-public float getColdResistance() {
-	return this.coldResistance;
+public static float getColdResistance() {
+	return coldResistance;
 }
 /**
  * Gets the drug resistance value setted.
  * @author p1-r_squar3d
  */
-public float getDrugResistance() {
-	return this.drugResistance;
+public static float getDrugResistance() {
+	return drugResistance;
 }
 /**
  * Being worked on. Not recommended for use yet, may cause world issues.
@@ -169,7 +187,7 @@ public float getDrugResistance() {
  */
 @Deprecated
 public Pathogen setMicroScopicScale(float f) {
-	this.microscopicScale = f;
+	microscopicScale = f;
 	
 	return this;
 }

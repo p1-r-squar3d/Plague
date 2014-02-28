@@ -6,9 +6,10 @@ import plague.common.Plague;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.world.World;
 
-public class BlockAtrocious extends BlockSand {
+public class BlockAtrocious extends Block {
 
 	public BlockAtrocious(int par1, Material par2Material) {
 		super(par1, par2Material);

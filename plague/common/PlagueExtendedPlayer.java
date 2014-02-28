@@ -16,8 +16,8 @@ import cpw.mods.fml.common.network.Player;
 public class PlagueExtendedPlayer implements IExtendedEntityProperties{
 
 	public final static String EXT_PROP_NAME = "PlagueExtendedPlayer";
-	private final EntityPlayer player;
-	private int maxDNAPoints;
+	private static EntityPlayer player;
+	private static int maxDNAPoints;
 	
 	public static final int DNAPOINTS_WATCHER = 0;
 	
@@ -29,14 +29,14 @@ public class PlagueExtendedPlayer implements IExtendedEntityProperties{
 	this.maxDNAPoints = 100;
 	}
 	
-	public final void sync()
+	public static void sync()
 	{
 	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
 	DataOutputStream outputStream = new DataOutputStream(bos);
 
 	try {
-	outputStream.writeInt(this.maxDNAPoints);
-	outputStream.writeInt(this.player.getDataWatcher().getWatchableObjectInt(DNAPOINTS_WATCHER));
+	outputStream.writeInt(maxDNAPoints);
+	outputStream.writeInt(player.getDataWatcher().getWatchableObjectInt(DNAPOINTS_WATCHER));
 	} catch (Exception ex) {
 	ex.printStackTrace();
 	}

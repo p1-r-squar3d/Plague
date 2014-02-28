@@ -20,6 +20,7 @@ public static Block blockDNAMergerBasicIdle;
 public static Block blockDNAMergerBasicActive;
 public static Block blockCombustionChargerBasicIdle;
 public static Block blockCombustionChargerBasicActive;
+public static Block blockCircuitBuilder;
 
 
 @EventHandler
@@ -35,18 +36,23 @@ public static void load(FMLPreInitializationEvent c) {
 	blockDNAMergerBasicIdle = new BlockDNAMergerBasic(1043, false).setUnlocalizedName("merger_idle").setHardness(3.7F).setCreativeTab(Plague.tabPlagueBlocks);
 	blockDNAMergerBasicActive = new BlockDNAMergerBasic(1044, true).setUnlocalizedName("merger_active").setHardness(3.7F).setLightValue(0.9F);
 	
+	blockCircuitBuilder = new BlockCircuitBuilder(1045).setUnlocalizedName("circuit_builder").setCreativeTab(Plague.tabPlagueBlocks);
+	
 	GameRegistry.registerBlock(blockSyringeScannerAdvanced, "syringe_scanner.advanced.idle");
-	GameRegistry.registerBlock(blockAtrocious, "atrocious.fluid");
+	GameRegistry.registerBlock(blockAtrocious, TooltipBlock.class, "Some Block");
 	GameRegistry.registerBlock(blockSyringeScannerBasicIdle, "syringe_scanner.idle");
 	GameRegistry.registerBlock(blockSyringeScannerBasicActive, "syringe_scanner.active");
 	GameRegistry.registerBlock(blockDNAMergerBasicIdle, "merger.idle");
 	GameRegistry.registerBlock(blockDNAMergerBasicActive, "merger.active");
+	GameRegistry.registerBlock(blockCircuitBuilder, "circuit.builder");
 	
 	LanguageRegistry.instance().addStringLocalization("container.macerator", "Basic Syringe Scanner");
 	LanguageRegistry.instance().addStringLocalization("container.dnamerger", "Basic DNA Merger");
 	
 	LanguageRegistry.instance().addStringLocalization("tile.scanner_idle.name", "Basic Syringe Scanner");
 	LanguageRegistry.instance().addStringLocalization("tile.merger_idle.name", "Basic DNA Merger");
+	
+	LanguageRegistry.instance().addStringLocalization("tile.circuit_builder.name", "Circuit Builder");
 	
 }
 }
