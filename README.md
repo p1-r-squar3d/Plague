@@ -5,8 +5,8 @@ The source code for the Minecraft modification "Plague".
 
 You may use this code for your own work, as of this source code is for educational purposes.
 
-I am not responsible for any damages may happen to your code upon using this source.
-
+This code is considered unstable, I am not responsible for any damages may happen to your code upon using this source.
+=
 Sincerely, p1-r_squar3d
 
 Data
